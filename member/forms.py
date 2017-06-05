@@ -15,6 +15,7 @@ class SignInModelForm(forms.ModelForm):
                     }))
 
     class Meta:
+        model = get_user_model()
         fields = [
             'email',
             'password',
