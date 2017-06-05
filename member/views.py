@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate,\
-    login as auth_login
+    login as auth_login, \
+    logout as auth_logout
 from member.forms import SignUpModelForm, SignInModelForm
 
 
@@ -34,3 +35,7 @@ def signin(request):
     else:
         form = SignInModelForm()
         return render(request, 'member/signin.html', {'form': form})
+
+def signout(request):
+    auth_logout(request)
+    return redirect('member:signin')
