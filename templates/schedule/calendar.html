@@ -10,6 +10,19 @@
 
       <table style="width:80%; margin: 0 auto;"  class="table table-bordered">
         <tr>
+          {% if thismonth != 1 %}
+          <th style="text-align: center;"><a href="/schedule/{{ YEAR }}{{ thismonth | add:-1 }}"><</a></th>
+          {% else %}
+          <th style="text-align: center;"></th>
+          {% endif %}
+          <th colspan="5" style="text-align: center; background-color:green; color:white;">{{ thismonth }}</th>
+          {% if thismonth != 12 %}
+          <th style="text-align: center;"><a href="/schedule/{{ YEAR }}{{ thismonth | add:1 }}">></a></th>
+          {% else %}
+          <th style="text-align: center;"></th>
+          {% endif %}
+        </tr>
+        <tr>
           <th colspan="7" style="text-align: center;">{{ YEAR }}년</th>
         </tr>
         <tr>

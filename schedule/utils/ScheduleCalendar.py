@@ -39,15 +39,16 @@ this_month = int(today[4:6])
 this_day = int(today[6:])
 
 
-this_year_calendar = calendar.Calendar(calendar.SUNDAY).yeardays2calendar(this_year, 1)
+
 
 
 _year = {}
 
 
-def month_list(user):
-
-
+def month_list(user, current):
+    this_year = int(current[:4])
+    this_month = int(current[4:6])
+    this_year_calendar = calendar.Calendar(calendar.SUNDAY).yeardays2calendar(this_year, 1)
     result = []
 
     for num, month_wrap in enumerate(this_year_calendar):
@@ -84,7 +85,8 @@ def month_list(user):
                 result.append((day[0], day[1], date, -1))
     print (result)
 
-    return result, _year
+    return result, _year, this_year, this_month
+    
 
 
 def pack_one_week(result):
