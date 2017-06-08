@@ -10,7 +10,7 @@ def signup(request):
         form = SignUpModelForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('member:signup')
+            return redirect('member:signin')
         form = SignUpModelForm()
     else:
         form = SignUpModelForm()
@@ -28,7 +28,7 @@ def signin(request):
 
         if user is not None:
             auth_login(request, user)
-            return redirect('member:signup')
+            return redirect('schedule:memo_main')
         else:
             form = SignInModelForm()
             return render(request, 'member/signin.html', {'form': form})
@@ -39,6 +39,3 @@ def signin(request):
 def signout(request):
     auth_logout(request)
     return redirect('member:signin')
-
-def index(request):
-    return render(request, 'common/index.html', {})
