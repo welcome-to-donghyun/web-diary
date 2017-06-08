@@ -6,6 +6,7 @@ class MyUserManager(BaseUserManager):
         user = MyUser(email = email,
                       nickname = nickname)
         user.set_password(password)
+        user.is_active = True
         user.save()
 
         return user

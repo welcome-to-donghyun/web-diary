@@ -46,23 +46,7 @@ _year = {}
 
 
 def month_list(user):
-    # 지난 날들에 ToDoList를 했는지 알아보는 Dict
-    # LAST_TO_DO_LISTS는 날짜와, progress로 이루어져있다.
-    # LAST_TO_DO_LISTS = {}
-    # for last_day in range(1, this_day + 1):
-    #     last_to_do_list = ToDoList.objects.filter(
-    #         date=datetime.date(this_year, this_month, last_day),
-    #         user=user
-    #     )
-    #
-    #     if last_to_do_list:
-    #         LAST_TO_DO_LISTS[last_day] = (
-    #             last_to_do_list[0].date.strftime('%Y%m%d'),
-    #             last_to_do_list[0].get_progress_display()
-    #         )
-    #
-    #     else:
-    #         LAST_TO_DO_LISTS[last_day] = (None, '#eeeeee')
+
 
     result = []
 
