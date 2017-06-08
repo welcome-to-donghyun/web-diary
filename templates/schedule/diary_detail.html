@@ -13,12 +13,12 @@
       <img src="{{ diary.img.url }}" style="width:600px; height:400px;" alt="">
       <p class="lead">{{ diary.description }}</p>
     </div>
-    <a href="{% url 'schedule:diary_edit' diary_id=diary.date %}" class="btn btn-default btn-primary">Edit</a>
     <form action="{% url 'schedule:diary_delete' diary_id=diary.date %}" method="POST" style="display: inline-block;">
         {% csrf_token %}
-        <button type="submit" class="btn btn-default btn-danger">Delete</button>
+        <button type="submit" class="btn btn-default btn-success">삭제</button>
     </form>
-    <a href="{% url 'schedule:memo_main' %}" class='btn btn-default btn-primary'>Back</a>
+    <a href="{% url 'schedule:diary_edit' diary_id=diary.date %}" class="btn btn-default btn-success">편집</a>
+
   </div>
   <div class="col-md-4">
 
