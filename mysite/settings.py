@@ -32,6 +32,8 @@ SECRET_KEY = '9cs_5c7a0nnx8ox*2kw_%v^k_a2!e*r+@ub82mnxglod4f&ca!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = "member.MyUser"
+
 ALLOWED_HOSTS = [
     '*',
 ]
@@ -40,6 +42,8 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'member',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
