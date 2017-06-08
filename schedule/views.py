@@ -15,18 +15,16 @@ def index(request):
 
     user = request.user
     if user.id is not None:
-        return redirect('schedule:memo_main')
+        return redirect('schedule:memo_main', current=ScheduleCalendar.today)
     else:
         return redirect('member:signin')
 
 # @login_required()
-def to_do_list_calendar(request, date=ScheduleCalendar.today):
-
+def to_do_list_calendar(request, current=ScheduleCalendar.today):
+    date=ScheduleCalendar.today
     today = ScheduleCalendar.today
-    this_year = ScheduleCalendar.this_year
     this_day = ScheduleCalendar.this_day
-    this_month = ScheduleCalendar.this_month
-    result, _year = ScheduleCalendar.month_list(request.user)
+    result, _year, this_year, this_month = ScheduleCalendar.month_list(request.user, current)
     this_month_list = ScheduleCalendar.pack_one_week(result)
 
     context = {
@@ -66,7 +64,7 @@ class MemoNew(View):
             memo = form.save(commit=False)
             memo.user = request.user
             memo.save()
-            return redirect('schedule:memo_main')
+            return redirect('schedule:memo_main', current=ScheduleCalendar.today)
 
 
 # @login_required()
@@ -77,7 +75,7 @@ def memo_edit(request, pk):
 
         if form.is_valid():
             form.save()
-            return redirect('schedule:memo_main')
+            return redirect('schedule:memo_main', current=ScheduleCalendar.today)
     else:
         form = MemoEditModelForm(instance=memo)
 
@@ -107,7 +105,7 @@ class MemoDelete(View):
         if memo.user == user:
             memo.delete()
 
-        return redirect('schedule:memo_main')
+        return redirect('schedule:memo_main', current=ScheduleCalendar.today)
 
 # Diary 모델
 
@@ -129,7 +127,7 @@ class DiaryNew(View):
             diary.user = request.user
             diary.date = request.POST['date']
             diary.save()
-            return redirect('schedule:memo_main')
+            return redirect('schedule:memo_main', current=ScheduleCalendar.today)
         else:
             return redirect('member:index')
 
@@ -141,7 +139,7 @@ def diary_edit(request, diary_id):
 
         if form.is_valid():
             form.save()
-            return redirect('schedule:memo_main')
+            return redirect('schedule:memo_main', current=ScheduleCalendar.today)
     else:
         form = DiaryEditModelForm(instance=diary)
 
@@ -167,8 +165,9 @@ class DiaryDelete(View):
 
     def post(self, request, *args, **kwargs):
         user = request.user
-        diary = get_object_or_404(Memo, pk=kwargs['pk'])
+        print(kwargs['diary_id'])
+        diary = get_object_or_404(Diary, date=kwargs['diary_id'], user=request.user)
         if diary.user == user:
             diary.delete()
 
-        return redirect('schedule:memo_main')
+        return redirect('schedule:memo_main', current=ScheduleCalendar.today)

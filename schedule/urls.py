@@ -5,7 +5,7 @@ app_name='schedule'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
 
-    url(r'^schedule$', views.to_do_list_calendar, name='memo_main'),
+    url(r'^schedule/(?P<current>[0-9]+)$', views.to_do_list_calendar, name='memo_main'),
 
     url(r'^memo/new$', views.MemoNew.as_view(), name='memo_new'),
     url(r'^memo/edit/(?P<pk>[0-9]+)$', views.memo_edit, name='memo_edit'),
