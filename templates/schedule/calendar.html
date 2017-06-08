@@ -1,0 +1,47 @@
+{% extends 'common/index.html' %}
+
+{% block content %}
+<div id="maincontainer">
+  <section id="section">
+    <article id="calendar">
+
+      <hr style="border-top: 0px;">
+
+
+      <table style="width:80%; margin: 0 auto;"  class="table table-bordered">
+        <tr>
+          <th colspan="7" style="text-align: center;">{{ YEAR }}년</th>
+        </tr>
+        <tr>
+          {% for day in DAY %}
+          <td style="text-align: center;">{{ day }}</td>
+          {% endfor %}
+        </tr>
+        {% for week in thisresult %}
+        <tr>
+          {% for date, day, last_to_do_list in week %}
+          <td style="text-align: center; background-color:{{ progress }};">
+            {% if date == thisday %}
+            <span>
+              <a href="#">{{ date }}</a>
+            </span>
+            {% elif last_to_do_list %}
+            <span style="color: red;">
+              <a href="#">{{ date }}</a>
+            </span>
+            {% elif date %}
+            <span>{{ date }}</span>
+            {% endif %}
+          </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+      </table>
+    </article>
+
+
+  </section>
+
+
+</div>
+{% endblock %}
