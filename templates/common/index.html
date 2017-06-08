@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Wecome To DongHyun</title>
+
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'custom/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'custom/css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'custom/css/section.css' %}">
+
+</head>
+<body>
+  <div id='header'>
+    <div class="header-container">
+      <div class="header-content">
+        <div class="header-left">
+          <div class='header-logo-container'>
+              <a href="{% url 'member:index' %}" class="header-logo-a">
+                <div class='header-logo'></div>
+              </a>
+            </h1>
+          </div>
+        </div>
+        <div class="header-right">
+          {% if user.is_authenticated %}
+          <div class="user-profile-container">
+            <div class="user-profile">
+              <span>{{ user.nickname }}</span>
+            </div>
+          </div>
+          <div class='scedule-container'>
+            <a href="{% url 'member:signout' %}">
+              <span>로그아웃</span>
+            </a>
+          </div>
+          {% else %}
+          <div class='scedule-container'>
+            <a href="{% url 'member:signin' %}">
+              <span>로그인</span>
+            </a>
+          </div>
+          <div class='scedule-container'>
+            <a href="{% url 'member:signup' %}">
+              <span>가입하기</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

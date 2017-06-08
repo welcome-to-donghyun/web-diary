@@ -39,3 +39,6 @@ def signin(request):
 def signout(request):
     auth_logout(request)
     return redirect('member:signin')
+
+def index(request):
+    return render(request, 'common/index.html', {})
