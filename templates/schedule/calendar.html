@@ -19,18 +19,23 @@
         </tr>
         {% for week in thisresult %}
         <tr>
-          {% for date, day, last_to_do_list in week %}
-          <td style="text-align: center; background-color:{{ progress }};">
-            {% if date == thisday %}
-            <span>
-              <a href="#">{{ date }}</a>
-            </span>
-            {% elif last_to_do_list %}
-            <span style="color: red;">
-              <a href="#">{{ date }}</a>
-            </span>
-            {% elif date %}
-            <span>{{ date }}</span>
+          {% for date, day, last_to_do_list, diary in week %}
+          <td style="text-align: center;">
+
+            {% if diary == 1 %}
+              {% if today == last_to_do_list %}
+
+              <a href="{% url 'schedule:diary_detail' diary_id=last_to_do_list %}" style="border: 3px #f00 solid; border-radius:10px;">{{ date }}</a>
+              {% else %}
+              <a href="{% url 'schedule:diary_detail' diary_id=last_to_do_list %}" style="border-bottom: 3px solid #f00;">{{ date }}</a>
+              {% endif %}
+
+            {% elif diary == 0 %}
+              {% if today == last_to_do_list %}
+                <a href="{% url 'schedule:diary_new' diary_id=last_to_do_list %}" style="border: 3px #f00 solid; border-radius:10px;">{{ date }}</a>
+              {% else %}
+              <a href="{% url 'schedule:diary_new' diary_id=last_to_do_list %}">{{ date }}</a>
+              {% endif %}
             {% endif %}
           </td>
         {% endfor %}
@@ -41,6 +46,25 @@
 
 
   </section>
+
+  <aside id='aside'>
+    <div id="today-goal">
+      <div style="width:80%; margin: 0 auto;">
+      <p style="text-align: center; font-size: 20px;">Memo</p>
+
+      <a href="{% url 'schedule:memo_new' %}" class="btn btn-default btn-primary">추가하기</a>
+
+      <div>
+        {% for memo in memos %}
+        <p style="font-size: 15px;">{{ memo.title }}</p>
+
+        <a href="{% url 'schedule:memo_detail' pk=memo.pk %}" class = "btn btn-default btn-primary">상세보기</a>
+        {% endfor %}
+      </div>
+      </div>
+    </div>
+
+  </aside>
 
 
 </div>
