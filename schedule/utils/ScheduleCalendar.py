@@ -71,7 +71,7 @@ def month_list(user):
 
             if date != 0:
 
-                diary = Diary.objects.filter(date=date)
+                diary = Diary.objects.filter(date=date, user=user)
                 print (diary)
                 if diary:
                     # 다이어리가 있을 경우

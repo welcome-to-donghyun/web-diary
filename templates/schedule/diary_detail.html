@@ -10,7 +10,9 @@
       <h1>{{ diary.title }}</h1>
     </div>
     <div>
+      {% if diary.img %}
       <img src="{{ diary.img.url }}" style="width:600px; height:400px;" alt="">
+      {% endif %}
       <p class="lead">{{ diary.description }}</p>
     </div>
     <form action="{% url 'schedule:diary_delete' diary_id=diary.date %}" method="POST" style="display: inline-block;">
