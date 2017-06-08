@@ -2,6 +2,7 @@ import calendar
 import datetime
 
 from django.utils import timezone
+from ..models import Diary
 
 DAY = {
     0: 'Sun',
@@ -73,8 +74,31 @@ def month_list(user):
 
     for week in _year[YEAR[this_month]]:
         for day in week:
-            date = 0
-            result.append((day[0], day[1], date))
+            # 일자가 포함되어있다면
+            if day[0] != 0:
+                if day[0] < 10:
+                    date='{}0{}0{}'.format(this_year, this_month, day[0])
+                else:
+                    date='{}0{}{}'.format(this_year, this_month, day[0])
+            else:
+                date = 0
+            print (date)
+            # 다이어리가 있는지 없는지 여부
+
+            if date != 0:
+
+                diary = Diary.objects.filter(date=date)
+                print (diary)
+                if diary:
+                    # 다이어리가 있을 경우
+                    result.append((day[0], day[1], date, 1))
+                else:
+                    # 다이어리가 없을 경우
+                    result.append((day[0], day[1], date, 0))
+            else:
+                # 해당 날짜가 없을 경우
+                result.append((day[0], day[1], date, -1))
+    print (result)
 
     return result, _year
 

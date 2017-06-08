@@ -1,0 +1,28 @@
+{% extends 'common/index.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-1">
+
+  </div>
+  <div class="col-md-10">
+    <div>
+      <h1>{{ diary.title }}</h1>
+    </div>
+    <div>
+      <img src="{{ diary.img.url }}" alt="">
+      <p class="lead">{{ diary.description }}</p>
+    </div>
+    <a href="{% url 'schedule:diary_edit' diary_id=diary.date %}" class="btn btn-default btn-primary">Edit</a>
+    <form action="{% url 'schedule:diary_delete' diary_id=diary.date %}" method="POST" style="display: inline-block;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-default btn-danger">Delete</button>
+    </form>
+    <a href="{% url 'schedule:memo_main' %}" class='btn btn-default btn-primary'>Back</a>
+  </div>
+  <div class="col-md-1">
+
+  </div>
+
+</div>
+{% endblock %}
