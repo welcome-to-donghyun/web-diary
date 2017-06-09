@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,\
     logout as auth_logout
 from member.forms import SignUpModelForm, SignInModelForm
 from django.contrib import messages
+from schedule.utils import ScheduleCalendar
 
 
 def signup(request):
@@ -30,7 +31,7 @@ def signin(request):
 
         if user is not None:
             auth_login(request, user)
-            return redirect('schedule:memo_main')
+            return redirect('schedule:memo_main', current=ScheduleCalendar.today)
         else:
             form = SignInModelForm()
             messages.error(request, '아이디 또는 비밀번호를 다시 확인하세요.')
