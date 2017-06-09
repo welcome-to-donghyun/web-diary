@@ -62,9 +62,15 @@ def month_list(user, current):
             # 일자가 포함되어있다면
             if day[0] != 0:
                 if day[0] < 10:
-                    date='{}0{}0{}'.format(this_year, this_month, day[0])
+                    if this_month <10:
+                        date='{}0{}0{}'.format(this_year, this_month, day[0])
+                    else:
+                        date='{}{}0{}'.format(this_year, this_month, day[0])
                 else:
-                    date='{}0{}{}'.format(this_year, this_month, day[0])
+                    if this_month <10:
+                        date='{}0{}{}'.format(this_year, this_month, day[0])
+                    else:
+                        date='{}{}{}'.format(this_year, this_month, day[0])
             else:
                 date = 0
             print (date)
@@ -86,7 +92,7 @@ def month_list(user, current):
     print (result)
 
     return result, _year, this_year, this_month
-    
+
 
 
 def pack_one_week(result):
